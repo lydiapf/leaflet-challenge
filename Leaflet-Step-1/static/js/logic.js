@@ -55,7 +55,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
         },
         style: styleinfo,
         onEachFeature: function(feature, layer){
-            layer.bindPopup("magnitude" + feature.properties.mag + "<br>location" + feature.properties.place)
+            layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place)
         }
     }).addTo(myMap)
 
@@ -64,12 +64,13 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [1,2,3,4,5]
+        grades = [0,1,2,3,4,5]
+        colors = ["purple","blue","green","yellow","orange","red"]
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            '<i style="background:' + colors[i] + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
