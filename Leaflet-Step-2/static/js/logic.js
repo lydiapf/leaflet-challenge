@@ -20,10 +20,21 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?acce
   accessToken: API_KEY
 });
 
+var grayScale = 
+
+L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "light-v10",
+  accessToken: API_KEY
+});
+
 var myMap = L.map("map",{
     center: [40.9, -95.4],
     zoom: 4, 
-    layers: [satellite, streetView]
+    layers: [satellite, streetView, grayScale]
 });
 
 streetView.addTo(myMap);
@@ -33,7 +44,8 @@ var earthquake = new L.LayerGroup();
 var plates = new L.LayerGroup();
 
 var baseMap = {Satellite: satellite,
-"Street View": streetView};
+"Street View": streetView,
+Grayscale: grayScale};
 
 var overlay = {Earthquakes: earthquake,
     "Tectonic Plates": plates};
